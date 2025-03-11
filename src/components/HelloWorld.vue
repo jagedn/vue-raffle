@@ -43,7 +43,7 @@
         </v-col>
 
         <v-col cols="6">
-          <participant-form></participant-form>
+          <participant-form ref="participants"></participant-form>
         </v-col>
 
       </v-row>
@@ -83,9 +83,12 @@ import {useAppStore} from '@/stores/app';
 const store = useAppStore();
 const dialog = ref(false)
 const congratulationsMsg = ref('')
+const participants = ref(null);
+
 const weHaveWinner = (winner)=>{
   congratulationsMsg.value = `Enhorabuena ${winner.value}, te ha tocado`
   dialog.value = true;
   store.removeParticipant(winner);
+  participants.value.removeLine(winner.value)
 }
 </script>

@@ -18,7 +18,6 @@ export const useAppStore = defineStore('app', () => {
     participants.value = participants.value.filter(function(e) {
       return e.id !== p.id
     })
-    console.log(participants.value)
   }
 
   function parseText(t){
