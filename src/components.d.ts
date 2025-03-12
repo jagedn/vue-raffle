@@ -13,5 +13,6 @@ declare module 'vue' {
     ParticipantForm: typeof import('./components/ParticipantForm.vue')['default']
     RouterLink: typeof import('vue-router')['RouterLink']
     RouterView: typeof import('vue-router')['RouterView']
+    Winners: typeof import('./components/Winners.vue')['default']
   }
 }

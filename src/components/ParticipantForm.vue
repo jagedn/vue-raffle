@@ -16,7 +16,6 @@
           </v-list-item-action>
         </v-list-item-title>
       </v-list-item>
-
     </v-col>
   </v-row>
 </template>
@@ -38,9 +37,7 @@ function getDuplicates(arr, key) {
 }
 
 function removeMe(current){
-  console.log(current)
-    store.removeParticipant(current)
-  console.log(participants.value)
+  store.removeParticipant(current)
 }
 
 const reset = ()=>{

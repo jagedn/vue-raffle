@@ -15,10 +15,16 @@ export const useAppStore = defineStore('app', () => {
   const participants = ref([
   ])
 
+  const winners = ref([])
+
   function removeParticipant(p) {
     participants.value = participants.value.filter(function(e) {
       return e.id !== p.id
     })
+  }
+  function addWinner(p) {
+    removeParticipant(p)
+    winners.value.push(p)
   }
 
   function add(l){
@@ -28,11 +34,12 @@ export const useAppStore = defineStore('app', () => {
 
   function reset(){
     participants.value = []
+    winners.value = []
   }
 
   const pickOne = computed(()=>{
     return Math.floor(Math.random() * participants.value.length) + 1
   })
 
-  return { participants, removeParticipant, pickOne, add, reset }
+  return { participants, winners, addWinner, removeParticipant, pickOne, add, reset }
 });
