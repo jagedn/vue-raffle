@@ -4,18 +4,16 @@
       <v-text-field label="Nombre" v-model="text" @keyup.enter="onKeyUp"></v-text-field>
     </v-col>
     <v-col cols="12">
+      <v-virtual-scroll :items="participants" :height="600">
+        <template v-slot:default="{ item }">
+          <v-btn @click="removeMe(item)" icon="mdi-delete"></v-btn>{{ item.value }}
+        </template>
+      </v-virtual-scroll>
+    </v-col>
+    <v-col cols="12">
       <v-btn @click="reset">
         Reset
       </v-btn>
-    </v-col>
-    <v-col cols="12">
-      <v-list-item v-for="item in participants" class="py-3">
-        <v-list-item-title>
-          <v-list-item-action start>
-            <v-btn @click="removeMe(item)" icon="mdi-delete"></v-btn>{{ item.value }}
-          </v-list-item-action>
-        </v-list-item-title>
-      </v-list-item>
     </v-col>
   </v-row>
 </template>

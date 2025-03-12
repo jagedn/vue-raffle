@@ -2,9 +2,11 @@
   <v-row>
     <v-col cols="12">Ganadores</v-col>
     <v-col cols="12">
-      <v-list :items="winners"
-              item-title="value"
-              item-value="id"></v-list>
+      <v-virtual-scroll :items="winners" :height="600">
+        <template v-slot:default="{ item }">
+          {{ item.value }}
+        </template>
+      </v-virtual-scroll>
     </v-col>
   </v-row>
 </template>
