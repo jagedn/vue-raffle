@@ -89,6 +89,5 @@ const weHaveWinner = (winner)=>{
   congratulationsMsg.value = `Enhorabuena ${winner.value}, te ha tocado`
   dialog.value = true;
   store.removeParticipant(winner);
-  participants.value.removeLine(winner.value)
 }
 </script>

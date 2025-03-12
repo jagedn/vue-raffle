@@ -14,21 +14,25 @@ const bgeven = '#b7acb3';
 export const useAppStore = defineStore('app', () => {
   const participants = ref([
   ])
+
   function removeParticipant(p) {
     participants.value = participants.value.filter(function(e) {
       return e.id !== p.id
     })
   }
 
-  function parseText(t){
-    participants.value = t.toString().split("\n").filter(l=>l.toString().trim().length>0).map( (l,idx)=>{
-      return { id: idx, value: l.trim(), bgColor: idx%2==0?bgeven:bgodd, color: idx%2==0?even:odd }
-    })
+  function add(l){
+    const idx = participants.value.length;
+    participants.value.push({ id: idx, value: l.trim(), bgColor: idx%2==0?bgeven:bgodd, color: idx%2==0?even:odd })
+  }
+
+  function reset(){
+    participants.value = []
   }
 
   const pickOne = computed(()=>{
     return Math.floor(Math.random() * participants.value.length) + 1
   })
 
-  return { participants, removeParticipant, parseText, pickOne }
+  return { participants, removeParticipant, pickOne, add, reset }
 });

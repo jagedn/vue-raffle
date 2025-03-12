@@ -1,35 +1,60 @@
 <template>
-    <v-textarea label="Participantes" v-model="text" @update:modelValue="onChange" rows="20"></v-textarea>
+  <v-row>
+    <v-col cols="12">
+      <v-text-field label="Nombre" v-model="text" @keyup.enter="onKeyUp"></v-text-field>
+    </v-col>
+    <v-col cols="12">
+      <v-btn @click="reset">
+        Reset
+      </v-btn>
+    </v-col>
+    <v-col cols="12">
+      <v-list-item v-for="item in participants" class="py-3">
+        <v-list-item-title>
+          <v-list-item-action start>
+            <v-btn @click="removeMe(item)" icon="mdi-delete"></v-btn>{{ item.value }}
+          </v-list-item-action>
+        </v-list-item-title>
+      </v-list-item>
+
+    </v-col>
+  </v-row>
 </template>
 
 <script setup lang="ts">
 import {useAppStore} from '@/stores/app';
+import {storeToRefs} from 'pinia';
 const store = useAppStore();
-const text = ref("")
-const onChange = ()=>{
-  const result = text.value.split("\n").reduce((a, c)=> {
-    a[c] = a[c] || {count: 0};
-    a[c].count +=1;
-    return a;
-  }, {});
 
-  const duplicates = Object.entries(result)
-    .filter(([k, v]) => v.count > 1 )
-    .map(([e])=> e);
+const text = ref("")
+const {participants} = storeToRefs(store)
+
+function getDuplicates(arr, key) {
+  return arr.filter((item, index, self) =>
+      index !== self.findIndex((t) => (
+        t[key] === item[key]
+      ))
+  );
+}
+
+function removeMe(current){
+  console.log(current)
+    store.removeParticipant(current)
+  console.log(participants.value)
+}
+
+const reset = ()=>{
+  store.reset()
+}
+
+const onKeyUp = ()=>{
+  store.add(text.value)
+  const duplicates = getDuplicates(participants.value, 'value');
   if( duplicates.length ){
     alert("Meeccccc, hay nombres duplicados")
-    return;
   }
-
-  store.parseText(text.value)
+  text.value = ""
 }
-
-const removeLine = (line)=>{
-  text.value = text.value.toString().split("\n").filter(l=>l!==line).join("\n")
-}
-defineExpose({
-  removeLine
-});
 
 </script>
 
