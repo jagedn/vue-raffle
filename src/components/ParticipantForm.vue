@@ -1,7 +1,7 @@
 <template>
   <v-row>
     <v-col cols="12">
-      <v-text-field label="Nombre" v-model="text" @keyup.enter="onKeyUp"></v-text-field>
+      <v-text-field label="Nombre" v-model="text" @keydown.enter="onKeyUp"></v-text-field>
     </v-col>
     <v-col cols="12">
       <v-virtual-scroll :items="participants" :height="600">
@@ -42,11 +42,13 @@ const reset = ()=>{
   store.reset()
 }
 
-const onKeyUp = ()=>{
+const onKeyUp = (event)=>{
+  event.preventDefault()
   store.add(text.value)
-  const duplicates = getDuplicates(participants.value, 'value');
-  if( duplicates.length ){
-    alert("Meeccccc, hay nombres duplicados")
+  let duplicates = getDuplicates(participants.value, 'value');
+  while( duplicates.length ){
+    duplicates[0].value = duplicates[0].value +"-I";
+    duplicates = getDuplicates(participants.value, 'value');
   }
   text.value = ""
 }
