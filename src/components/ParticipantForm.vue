@@ -44,6 +44,9 @@ const reset = ()=>{
 
 const onKeyUp = (event)=>{
   event.preventDefault()
+  if( text.value.trim().length === 0){
+    return;
+  }
   store.add(text.value)
   let duplicates = getDuplicates(participants.value, 'value');
   while( duplicates.length ){

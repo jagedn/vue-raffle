@@ -2,15 +2,15 @@
   <v-layout class="rounded rounded-md">
     <v-app-bar title="MadridRuffle"></v-app-bar>
 
-    <v-main class="d-flex align-center justify-center" style="min-height: 300px;">
+    <v-main class="">
       <v-row>
-        <v-col cols="2" offset="1">
+        <v-col cols="12" sm="12" md="12" lg="2" xl="2" offset-lg="1">
           <participant-form></participant-form>
         </v-col>
-        <v-col cols="4">
+        <v-col cols="12" sm="12" md="12" lg="4" xl="4">
           <HelloWorld />
         </v-col>
-        <v-col cols="2">
+        <v-col cols="12" sm="12" md="12" lg="2" xl="2">
           <winners></winners>
         </v-col>
       </v-row>
