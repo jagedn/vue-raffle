@@ -1,6 +1,6 @@
 <template>
   <v-layout class="rounded rounded-md">
-    <v-app-bar title="MadridRuffle"></v-app-bar>
+    <v-app-bar title="MadridRaffle"></v-app-bar>
 
     <v-main class="">
       <v-row>
