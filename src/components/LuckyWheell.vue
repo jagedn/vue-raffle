@@ -24,7 +24,7 @@ const wheel = ref<InstanceType<typeof FortuneWheel> | null>(null);
 const store = useAppStore();
 const {participants} = storeToRefs(store);
 
-const gift = store.pickOne;
+const gift = ref(-1);
 
 // Optional: Center image
 const logo: ImgParams = {
@@ -40,6 +40,7 @@ const done = (result: Data) => {
 }
 
 const launchWheel = () => {
+  gift.value = store.pickOne
   wheel.value?.spin()
 }
 
